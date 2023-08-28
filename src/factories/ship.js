@@ -12,7 +12,7 @@ export class Ship {
   }
 
   hit(position) {
-    if (this.hits.includes(position) || position < 1 || position > 100) return;
+    if (this.hits.includes(position) || position < 0 || position > 99) return;
     this.hits.push(position);
   }
 
@@ -22,7 +22,7 @@ export class Ship {
   }
 }
 
-const ship = new Ship('Submarine', 3, true);
-console.log(ship);
+// const ship = new Ship('Submarine', 3, true);
+// console.log(ship);
 
 // END //

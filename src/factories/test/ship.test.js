@@ -36,4 +36,12 @@ describe('Ship interface testing', () => {
     ship.hit(22);
     expect(ship.isSunk()).toEqual(false);
   });
+
+  test.only('values where 0 > position > 99 will be ignored by the hit function', () => {
+    ship.hit(81);
+    ship.hit(82);
+    ship.hit(-1);
+    ship.hit(100);
+    expect(ship.hits.length).toEqual(2);
+  });
 });
