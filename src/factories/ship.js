@@ -1,14 +1,18 @@
 // START //
 
 export class Ship {
-  constructor(length) {
+  type;
+  length;
+  hits;
+
+  constructor(type, length) {
+    this.type = type;
     this.length = length;
     this.hits = [];
   }
 
   hit(position) {
-    if (this.hits.includes(position) || position < 0 || position >= this.length)
-      return;
+    if (this.hits.includes(position) || position < 1 || position > 100) return;
     this.hits.push(position);
   }
 
@@ -18,13 +22,7 @@ export class Ship {
   }
 }
 
-const ship = new Ship(3);
+const ship = new Ship('Submarine', 3, true);
 console.log(ship);
-
-ship.hit(0);
-ship.hit(1);
-ship.hit(2);
-
-console.log(ship.isSunk());
 
 // END //
