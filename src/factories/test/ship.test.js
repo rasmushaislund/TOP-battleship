@@ -6,13 +6,14 @@ describe('Ship interface testing', () => {
   let ship = Ship;
 
   beforeEach(() => {
-    ship = new Ship('Submarine', 3);
+    ship = new Ship('Submarine', 3, true);
   });
 
   test('create a ship', () => {
     expect(ship).toEqual({
       type: 'Submarine',
       length: 3,
+      vertical: true,
       hits: [],
     });
   });
@@ -37,11 +38,11 @@ describe('Ship interface testing', () => {
     expect(ship.isSunk()).toEqual(false);
   });
 
-  test.only('values where 0 > position > 99 will be ignored by the hit function', () => {
+  test('values where 1 > position > 100 will be ignored by the hit function', () => {
     ship.hit(81);
     ship.hit(82);
     ship.hit(-1);
-    ship.hit(100);
+    ship.hit(200);
     expect(ship.hits.length).toEqual(2);
   });
 });
