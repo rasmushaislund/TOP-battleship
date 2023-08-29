@@ -3,16 +3,18 @@
 export class Ship {
   type;
   length;
+  vertical = false;
   hits;
 
-  constructor(type, length) {
+  constructor(type, length, vertical) {
     this.type = type;
     this.length = length;
+    this.vertical = vertical;
     this.hits = [];
   }
 
   hit(position) {
-    if (this.hits.includes(position) || position < 0 || position > 99) return;
+    if (this.hits.includes(position) || position < 1 || position > 100) return;
     this.hits.push(position);
   }
 
@@ -21,8 +23,5 @@ export class Ship {
     return false;
   }
 }
-
-// const ship = new Ship('Submarine', 3, true);
-// console.log(ship);
 
 // END //
