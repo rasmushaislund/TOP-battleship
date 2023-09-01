@@ -25,6 +25,16 @@ export class Gameboard {
     }
   }
 
+  // Calculate total fleet size counted as total number of squares occupied
+  // by the ships on the game-ready board
+  fleet() {
+    let fleetSize = 0;
+    for (let i = 0; i < shipProperties.length; i++) {
+      fleetSize += shipProperties[i].length;
+    }
+    return fleetSize;
+  }
+
   // Create ships by calling Ship class
   createShips() {
     const props = shipProperties;
@@ -98,7 +108,6 @@ export class Gameboard {
 
   receiveAttack(row, column) {
     const ships = this.createShips();
-    console.log(ships);
 
     const coordinate = this.board[row][column];
 
@@ -109,7 +118,6 @@ export class Gameboard {
     } else {
       this.missedShots.push([row, column]);
     }
-    console.log(ships);
     console.log(this.missedShots);
   }
 
