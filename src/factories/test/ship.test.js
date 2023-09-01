@@ -19,30 +19,30 @@ describe('Ship interface testing', () => {
   });
 
   test('ship will accumulate hits', () => {
-    ship.hit(35);
-    ship.hit(45);
+    ship.hit(1);
+    ship.hit(2);
     expect(ship.hits.length).toEqual(2);
   });
 
   test('can ship sink?', () => {
-    ship.hit(5);
-    ship.hit(6);
-    ship.hit(7);
+    ship.hit(0);
+    ship.hit(1);
+    ship.hit(2);
     expect(ship.isSunk()).toEqual(true);
   });
 
   test('ship can only be hit once in the same position', () => {
-    ship.hit(20);
-    ship.hit(20);
-    ship.hit(22);
+    ship.hit(0);
+    ship.hit(0);
+    ship.hit(1);
     expect(ship.isSunk()).toEqual(false);
   });
 
-  test('values where 1 > position > 100 will be ignored by the hit function', () => {
-    ship.hit(81);
-    ship.hit(82);
+  test('values where 0 > position > ship.length will be ignored by the hit function', () => {
     ship.hit(-1);
-    ship.hit(200);
+    ship.hit(0);
+    ship.hit(1);
+    ship.hit(4);
     expect(ship.hits.length).toEqual(2);
   });
 });
