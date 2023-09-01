@@ -41,11 +41,11 @@ export class Gameboard {
   placeShips(ship, row, column, vertical) {
     if (vertical) {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row + i][column] = [i, ship.type];
+        this.board[row + i][column] = [i, ship];
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row][column + i] = [i, ship.type];
+        this.board[row][column + i] = [i, ship];
       }
     }
   }
@@ -65,7 +65,6 @@ export class Gameboard {
       const randY = Math.floor(Math.random() * this.gridSize);
       // Read orientation of ship
       const vertical = ships[i].vertical;
-      console.log(ships[i]);
 
       // Check if placement is allowed - otherwise start loop from current index again
       if (!this.placementAllowed(ships[i], randX, randY, vertical)) {
@@ -97,6 +96,23 @@ export class Gameboard {
     return true;
   }
 
+  receiveAttack(row, column) {
+    const ships = this.createShips();
+    console.log(ships);
+
+    const coordinate = this.board[row][column];
+
+    if (typeof coordinate !== 'number') {
+      // const type = coordinate[1];
+      // const findIndex = ships.indexOf(type);
+      coordinate[1].hit(coordinate[0]);
+    } else {
+      this.missedShots.push([row, column]);
+    }
+    console.log(ships);
+    console.log(this.missedShots);
+  }
+
   isBoardEmpty() {
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
@@ -115,3 +131,11 @@ const showBoard = boards.board;
 console.log(showBoard);
 
 boards.getRandomPlacement();
+
+boards.receiveAttack(2, 6);
+boards.receiveAttack(3, 6);
+boards.receiveAttack(4, 6);
+boards.receiveAttack(2, 2);
+boards.receiveAttack(2, 3);
+boards.receiveAttack(2, 4);
+boards.receiveAttack(2, 5);
