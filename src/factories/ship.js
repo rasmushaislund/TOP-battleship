@@ -14,7 +14,12 @@ export class Ship {
   }
 
   hit(position) {
-    if (this.hits.includes(position) || position < 1 || position > 100) return;
+    if (
+      this.hits.includes(position) ||
+      position < 0 ||
+      position > this.length - 1
+    )
+      return;
     this.hits.push(position);
   }
 
