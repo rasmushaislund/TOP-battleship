@@ -41,11 +41,11 @@ export class Gameboard {
   placeShips(ship, row, column, vertical) {
     if (vertical) {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row + i][column] = ship.type;
+        this.board[row + i][column] = [i, ship.type];
       }
     } else {
       for (let i = 0; i < ship.length; i++) {
-        this.board[row][column + i] = ship.type;
+        this.board[row][column + i] = [i, ship.type];
       }
     }
   }
