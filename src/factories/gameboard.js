@@ -112,11 +112,11 @@ export class Gameboard {
     if (typeof coordinate !== 'number') {
       coordinate[1].hit(coordinate[0]);
       isHit = true;
+      this.allShipsSunk();
     } else {
       this.missedShots.push([row, column]);
       isHit = false;
     }
-    console.log(isHit);
     return isHit;
   }
 
