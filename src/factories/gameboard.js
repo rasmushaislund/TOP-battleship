@@ -31,17 +31,26 @@ export class Gameboard {
     let shipsArray = [];
 
     for (let i = 0; i < props.length; i++) {
-      const vessel = new Ship(
-        props[i].type,
-        props[i].length,
-        props[i].vertical,
-      );
+      const isVertical = [true, false][Math.round(Math.random())];
+      const vessel = new Ship(props[i].type, props[i].length, isVertical);
       shipsArray.push(vessel);
     }
     return shipsArray;
   }
 
-  placeShips() {
+  placeShips(ship, row, column, vertical) {
+    if (vertical) {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row + i][column] = ship.type;
+      }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        this.board[row][column + i] = ship.type;
+      }
+    }
+  }
+
+  getRandomPlacement() {
     // Get returned array from 'createShips()'
     const ships = this.createShips();
     console.log(ships);
@@ -49,41 +58,42 @@ export class Gameboard {
     // Check to see that board is empty (i.e. ready for a new game)
     if (!this.isBoardEmpty) return;
 
-    // Select random coordinate
-    const randX = Math.floor(Math.random() * this.gridSize);
-    const randY = Math.floor(Math.random() * this.gridSize);
-
-    // Deny placement if conditions for placement are not fulfilled.
-    // Else, place ships accordingly.
+    // For every ship in array
     for (let i = 0; i < ships.length; i++) {
-      if (!this.placementAllowed(ships[i], randX, randY)) {
-        continue;
-      } else {
-        if (ships[i].vertical === true) {
-          for (let j = 0; j < ships[i].length; j++) {
-            this.board[randX][randY + j] = ships[i].type;
-          }
-        } else {
-          for (let j = 0; j < ships[i].length; j++) {
-            this.board[randX + j][randY] = ships[i].type;
-          }
-        }
-      }
+      // Select random start-coordinate
+      const randX = Math.floor(Math.random() * this.gridSize);
+      const randY = Math.floor(Math.random() * this.gridSize);
+      // Read orientation of ship
+      const vertical = ships[i].vertical;
+      console.log(ships[i]);
+
+      // Check if placement is allowed - otherwise start loop from current index again
+      if (!this.placementAllowed(ships[i], randX, randY, vertical)) {
+        i--;
+      } else this.placeShips(ships[i], randX, randY, vertical);
     }
-    console.log(this.board);
   }
 
-  placementAllowed(shipIndex, randX, randY) {
-    // Placement of ship fully or partly outside grid perimeter
+  placementAllowed(ship, row, column, vertical) {
+    // Check if placement of ship is fully or partly outside grid perimeter
     if (
-      randX > this.gridSize ||
-      randY > this.gridSize ||
-      randX + shipIndex.length > this.gridSize ||
-      randY + shipIndex.length > this.gridSize
+      row > this.gridSize ||
+      column > this.gridSize ||
+      row + ship.length > this.gridSize ||
+      column + ship.length > this.gridSize
     )
       return false;
 
-    if (typeof this.board[randX][randY] !== 'number') return false;
+    // Check if a given coordinate is already occupied
+    if (vertical) {
+      for (let i = 0; i < ship.length; i++) {
+        if (typeof this.board[row + i][column] !== 'number') return false;
+      }
+    } else {
+      for (let i = 0; i < ship.length; i++) {
+        if (typeof this.board[row][column + i] !== 'number') return false;
+      }
+    }
     return true;
   }
 
@@ -104,4 +114,4 @@ boards.buildBoard();
 const showBoard = boards.board;
 console.log(showBoard);
 
-boards.placeShips();
+boards.getRandomPlacement();
