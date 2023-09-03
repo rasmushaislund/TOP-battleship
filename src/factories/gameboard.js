@@ -2,15 +2,18 @@
 
 import { shipProperties } from '../data/shipProperties';
 import { Ship } from './ship';
+import { Player } from './player';
 
 export class Gameboard {
   board;
   missedShots;
+  sunkenShips;
   gridSize = 10;
 
   constructor() {
     this.board = [];
     this.missedShots = [];
+    this.sunkenShips = [];
   }
 
   // Generate the game board as a 2D-array
@@ -107,17 +110,26 @@ export class Gameboard {
 
   receiveAttack(row, column) {
     let isHit;
-    const coordinate = this.board[row][column];
+    let coordinate = this.board[row][column];
 
     if (typeof coordinate !== 'number') {
       coordinate[1].hit(coordinate[0]);
       isHit = true;
-      this.allShipsSunk();
+      if (coordinate[1].isSunk()) {
+        this.sunkenShips.push(coordinate[1]);
+        console.log(this.sunkenShips);
+      }
     } else {
       this.missedShots.push([row, column]);
+      coordinate = 'miss';
       isHit = false;
     }
     return isHit;
+  }
+
+  allShipsSunk() {
+    if (!this.sunkenShips.length === shipProperties.length) return false;
+    return true;
   }
 
   isBoardEmpty() {
