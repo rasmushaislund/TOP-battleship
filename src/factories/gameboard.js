@@ -11,9 +11,9 @@ export class Gameboard {
   gridSize = 10;
 
   constructor() {
-    this.board = [];
-    this.missedShots = [];
-    this.sunkenShips = [];
+    this.board = []; // Interface
+    this.missedShots = []; // Interface
+    this.sunkenShips = []; // Interface
   }
 
   // Generate the game board as a 2D-array
@@ -110,7 +110,7 @@ export class Gameboard {
 
   receiveAttack(row, column) {
     let isHit;
-    let coordinate = this.board[row][column];
+    const coordinate = this.board[row][column];
 
     if (typeof coordinate !== 'number') {
       coordinate[1].hit(coordinate[0]);
@@ -121,7 +121,6 @@ export class Gameboard {
       }
     } else {
       this.missedShots.push([row, column]);
-      coordinate = 'miss';
       isHit = false;
     }
     return isHit;
@@ -142,6 +141,13 @@ export class Gameboard {
     }
     return true;
   }
+
+  // Use this to verify correct placement of ships
+  countOccupiedSquares() {
+    const availableSquares = this.gridSize * this.gridSize;
+    const fleetSize = this.fleet();
+    return availableSquares - (availableSquares - fleetSize);
+  }
 }
 
 const boards = new Gameboard();
@@ -158,3 +164,5 @@ boards.receiveAttack(2, 2);
 boards.receiveAttack(2, 3);
 boards.receiveAttack(2, 4);
 boards.receiveAttack(2, 5);
+
+console.log(boards.countOccupiedSquares());
