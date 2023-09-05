@@ -66,4 +66,13 @@ describe('Testing Gameboard class interfaces', () => {
     gameboard.receiveAttack(6, 5);
     expect(gameboard.allShipsSunk()).toBe(true);
   });
+
+  test('A missed shot will have its coordinates recorded in array', () => {
+    gameboard.placeShips(ship, 5, 5, true);
+    gameboard.receiveAttack(1, 8);
+    gameboard.receiveAttack(8, 6);
+    expect(gameboard.missedShots[0]).toContain(1, 8);
+    expect(gameboard.missedShots[1]).toContain(8, 6);
+    expect(gameboard.missedShots.length).toEqual(2);
+  });
 });
