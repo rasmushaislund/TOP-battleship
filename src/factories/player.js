@@ -3,19 +3,12 @@
 import { Gameboard } from './gameboard';
 
 export class Player {
-  playersTurn = 'human';
-  attacks;
+  playerOneName;
+  playerTwoName = 'computer';
+  activePlayer = this.playerOneName;
 
-  constructor(player) {
-    this.player = player;
-  }
-
-  changeTurn(playersTurn) {
-    if (playersTurn === 'human') {
-      playersTurn = 'computer';
-    } else {
-      playersTurn = 'human';
-    }
+  constructor(playerOneName) {
+    this.playerOneName = playerOneName;
   }
 
   attackSquare(row, column) {}
