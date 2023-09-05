@@ -7,11 +7,13 @@ import { Player } from './player';
 export class Gameboard {
   board;
   missedShots;
+  attacks;
   sunkenShips;
   gridSize = 10;
 
   constructor() {
     this.board = []; // Interface
+    this.attacks = [];
     this.missedShots = []; // Interface
     this.sunkenShips = []; // Interface
   }
@@ -109,15 +111,15 @@ export class Gameboard {
   }
 
   receiveAttack(row, column) {
+    this.attacks.push([row, column]);
     let isHit;
-    const coordinate = this.board[row][column];
+    let coordinate = this.board[row][column];
 
     if (typeof coordinate !== 'number') {
       coordinate[1].hit(coordinate[0]);
       isHit = true;
       if (coordinate[1].isSunk()) {
         this.sunkenShips.push(coordinate[1]);
-        console.log(this.sunkenShips);
       }
     } else {
       this.missedShots.push([row, column]);
@@ -165,4 +167,5 @@ boards.receiveAttack(2, 3);
 boards.receiveAttack(2, 4);
 boards.receiveAttack(2, 5);
 
-console.log(boards.countOccupiedSquares());
+console.log(boards.missedShots);
+console.log(boards.attacks);
