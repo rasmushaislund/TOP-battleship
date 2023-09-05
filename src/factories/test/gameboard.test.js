@@ -2,7 +2,6 @@
 
 import { Gameboard } from '../gameboard';
 import { Ship } from '../ship';
-import { shipProperties } from '../../data/shipProperties';
 
 describe('Testing Gameboard class interfaces', () => {
   let gameboard = Gameboard;
