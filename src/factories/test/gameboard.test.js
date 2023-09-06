@@ -74,4 +74,9 @@ describe('Testing Gameboard class interfaces', () => {
     expect(gameboard.missedShots[1]).toContain(8, 6);
     expect(gameboard.missedShots.length).toEqual(2);
   });
+
+  test.only('Every attack - whether a hit or miss - will be recorded', () => {
+    gameboard.receiveAttack(1, 8);
+    expect(gameboard.attacks.length).toEqual(1);
+  });
 });
