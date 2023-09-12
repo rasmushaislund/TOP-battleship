@@ -28,4 +28,18 @@ describe('Testing Player class interfaces', () => {
     player.activePlayer = player.playerTwoName;
     expect(player.activePlayer).toEqual('computer');
   });
+
+  test('Check that same coordinate cannot be attacked twice', () => {
+    player.attacks.push([1, 8]);
+    player.attackSquare(1, 8);
+    expect(player.hasBeenAttacked(1, 8)).toBe(true);
+    expect(player.hasBeenAttacked(1, 9)).toBe(false);
+  });
+
+  test.only('Player can launch attacks if the coordinate has not previously been attacked', () => {
+    player.attacks.push([1, 8]);
+    player.attackSquare(1, 0);
+    expect(player.attacks[1][0]).toEqual(1);
+    expect(player.attacks[1][1]).toEqual(0);
+  });
 });
