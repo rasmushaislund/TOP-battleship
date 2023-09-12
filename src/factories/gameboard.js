@@ -7,13 +7,11 @@ import { Player } from './player';
 export class Gameboard {
   board;
   missedShots;
-  attacks;
   sunkenShips;
   gridSize = 10;
 
   constructor() {
     this.board = []; // Interface
-    this.attacks = [];
     this.missedShots = []; // Interface
     this.sunkenShips = []; // Interface
   }
@@ -111,7 +109,6 @@ export class Gameboard {
   }
 
   receiveAttack(row, column) {
-    this.attacks.push([row, column]);
     let isHit;
     let coordinate = this.board[row][column];
 
@@ -168,4 +165,3 @@ boards.receiveAttack(2, 4);
 boards.receiveAttack(2, 5);
 
 console.log(boards.missedShots);
-console.log(boards.attacks);
