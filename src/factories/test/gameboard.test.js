@@ -75,8 +75,9 @@ describe('Testing Gameboard class interfaces', () => {
     expect(gameboard.missedShots.length).toEqual(2);
   });
 
-  test.only('Every attack - whether a hit or miss - will be recorded', () => {
-    gameboard.receiveAttack(1, 8);
-    expect(gameboard.attacks.length).toEqual(1);
+  test('Every attack - whether a hit or miss - will be recorded by the isHit variable', () => {
+    gameboard.placeShips(ship, 5, 5, true);
+    expect(gameboard.receiveAttack(5, 5)).toBe(true);
+    expect(gameboard.receiveAttack(1, 1)).toBe(false);
   });
 });
