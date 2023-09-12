@@ -43,3 +43,5 @@ describe('Testing Player class interfaces', () => {
     expect(player.attacks[1][1]).toEqual(0);
   });
 });
+
+// END //

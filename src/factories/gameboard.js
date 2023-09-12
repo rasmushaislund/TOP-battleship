@@ -165,3 +165,5 @@ boards.receiveAttack(2, 4);
 boards.receiveAttack(2, 5);
 
 console.log(boards.missedShots);
+
+// END //

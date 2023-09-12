@@ -46,3 +46,5 @@ describe('Ship interface testing', () => {
     expect(ship.hits.length).toEqual(2);
   });
 });
+
+// END //
