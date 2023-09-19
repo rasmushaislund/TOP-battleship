@@ -26,8 +26,10 @@
 
   /* Gaps */
   --text-to-text-gap: 20px;
+  --board-gap: 30px;
 
   /* Padding */
+  --body-padding: 10px 50px;
   --modal-padding: 20px 40px;
   --btn-padding: 10px 15px;
   --input-padding: 5px 10px;
@@ -62,6 +64,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: var(--body-padding);
 }
 
 input[type='text'] {
@@ -114,8 +117,12 @@ dialog::backdrop {
 }
 
 .modal-label {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
+}
+
+#player-name {
+  max-width: 250px;
 }
 
 .btn {
@@ -127,6 +134,7 @@ dialog::backdrop {
   color: var(--text-color-inverse);
   font-size: 0.9rem;
   font-weight: 700;
+  transition: all 0.2s 0s ease-in-out;
 }
 
 .btn:hover {
@@ -134,9 +142,52 @@ dialog::backdrop {
   box-shadow: var(--btn-shadow);
 }
 
+.header {
+  margin-top: 25px;
+}
+
 .title {
   font-family: 'Monoton', 'Inter', sans-serif;
   font-size: 5rem;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.main-game {
+  margin-top: 25px;
+  border: 1px solid black;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-container {
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: var(--board-gap);
+  margin-top: 25px;
+}
+
+.game-board {
+  height: 300px;
+  width: 300px;
+  border: 1px solid red;
+}
+
+#new-game-btn {
+  margin-top: 25px;
 }
 
 /* Github link */
