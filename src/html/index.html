@@ -4,6 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body></body>
+  <body>
+    <div class="developer">
+      <p class="copyright">&copy<span id="copyright-span"> 2023</span></p>
+      <a
+        class="github-link"
+        href="https://github.com/rasmushaislund"
+        target="_blank"
+        >Rasmus H.
+        <img
+          src="../assets/img/github-logo.svg"
+          class="github-logo"
+          alt="github logo"
+      /></a>
+    </div>
+    <div class="header">
+      <p class="title">BATTLESHIP</p>
+    </div>
+    <dialog class="modal">
+      <label class="modal-label" for="player-name">Enter your game alias</label>
+      <input id="player-name" type="text" name="player_name" maxlength="50" minlength="1" placeholder="Enter alias">
+      <button class="btn" type="button">START</button>
+    </dialog>
+    <div class="main-game hide">
+      <div class="game-container">
+        <p class="game-text" id="player-turn">
+          Waiting for <span id="player-id">"PLAYER"</PLAYER></span> to make an attack
+        </p>
+        <p class="game-text" id="player-won"><span id="winnder-id">"PLAYER" </span>wins !!</p>
+        <div class="board-container">
+          <div class="board">
+            <p class="game-text"><span id="your-board">"PLAYER" </span>board</p>
+            <div class="game-board"></div>
+          </div>
+          <div class="board">
+            <p class="game-text"><span id="opponent-board">"COMPUTER" </span>board</p>
+            <div class="game-board"></div>
+          </div>
+        </div>
+        <button class="btn" type="button">NEW GAME</button>
+      </div>
+    </div>
+  </body>
 </html>
