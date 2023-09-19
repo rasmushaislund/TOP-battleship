@@ -4,6 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Monoton&display=swap"
+      rel="stylesheet"
+    />
   <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script><link href="style.css" rel="stylesheet"></head>
-  <body></body>
+  <body>
+    <div class="developer">
+      <p class="copyright">&copy<span id="copyright-span"> 2023</span></p>
+      <a
+        class="github-link"
+        href="https://github.com/rasmushaislund"
+        target="_blank"
+        >Rasmus H.
+        <img
+          src="assets/img/github-logo.4914d57c6be0c41264d6.svg"
+          class="github-logo"
+          alt="github logo"
+      /></a>
+    </div>
+    <div class="header">
+      <p class="title">BATTLESHIP</p>
+    </div>
+    <dialog class="modal">
+      <label class="modal-label" for="player-name">Enter your game alias</label>
+      <input id="player-name" type="text" name="player_name" maxlength="50" minlength="1" placeholder="Enter alias" required autofocus="true">
+      <button class="btn" type="button">START</button>
+    </dialog>
+    <div class="main-game">
+      <div class="game-container">
+        <p class="game-text" id="player-turn">
+          Waiting for <span id="player-id">"PLAYER"</PLAYER></span> to make an attack
+        </p><i class="fa fa-spinner fa-pulse"></i>
+        <p class="game-text" id="player-won"><span id="winnder-id">"PLAYER" </span>wins !!</p>
+        <div class="board-container">
+          <div class="board">
+            <p class="game-text"><span id="your-board">"PLAYER" </span>board</p>
+            <div class="game-board"></div>
+          </div>
+          <div class="board">
+            <p class="game-text"><span id="opponent-board">"COMPUTER" </span>board</p>
+            <div class="game-board"></div>
+          </div>
+        </div>
+        <button class="btn" type="button">NEW GAME</button>
+      </div>
+    </div>
+  </body>
 </html>
