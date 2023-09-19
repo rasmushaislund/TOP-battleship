@@ -13,8 +13,10 @@ copyrightSpan.textContent = new Date().getFullYear();
 
 // window.addEventListener('load', () => {
 //   const modal = document.querySelector('.modal');
+//   const mainGame = document.querySelector('.main-game');
 //   modal.showModal();
 //   modal.classList.add('show');
+//   mainGame.classList.add('hide');
 // });
 
 // END //
