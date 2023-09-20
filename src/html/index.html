@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter&family=Playfair+Display&display=swap"
       rel="stylesheet"
@@ -41,22 +48,38 @@
     </div>
     <dialog class="modal">
       <label class="modal-label" for="player-name">Enter your game alias</label>
-      <input id="player-name" type="text" name="player_name" maxlength="50" minlength="1" placeholder="Enter alias" required autofocus="true">
+      <input
+        id="player-name"
+        type="text"
+        name="player_name"
+        maxlength="50"
+        minlength="1"
+        placeholder="Enter alias"
+        required
+        autofocus="true"
+      />
       <button class="btn" type="button">START</button>
     </dialog>
     <div class="main-game">
       <div class="game-container">
-        <p class="game-text" id="player-turn">
-          Waiting for <span id="player-id">"PLAYER"</PLAYER></span> to make an attack
+        <div class="player-turn">
+          <p class="game-text" id="player-turn">
+            Waiting for <span id="player-id">"PLAYER"</span>
+          </p>
+          <div class="loader"></div>
+        </div>
+        <p class="game-text" id="player-won">
+          <span id="winner-id">"PLAYER"</span> wins!
         </p>
-        <p class="game-text" id="player-won"><span id="winnder-id">"PLAYER" </span>wins !!</p>
         <div class="board-container">
           <div class="board">
-            <p class="game-text"><span id="your-board">"PLAYER" </span>board</p>
+            <p class="game-text"><span id="your-board">"PLAYER"</span> board</p>
             <div class="game-board"></div>
           </div>
           <div class="board">
-            <p class="game-text"><span id="opponent-board">"COMPUTER" </span>board</p>
+            <p class="game-text">
+              <span id="opponent-board">"COMPUTER"</span> board
+            </p>
             <div class="game-board"></div>
           </div>
         </div>
