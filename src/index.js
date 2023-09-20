@@ -12,11 +12,12 @@ copyrightSpan.textContent = new Date().getFullYear();
 // Show modal with page load
 
 // window.addEventListener('load', () => {
-//   const modal = document.querySelector('.modal');
 //   const mainGame = document.querySelector('.main-game');
+//   mainGame.classList.add('hide');
+
+//   const modal = document.querySelector('.modal');
 //   modal.showModal();
 //   modal.classList.add('show');
-//   mainGame.classList.add('hide');
 // });
 
 // END //
