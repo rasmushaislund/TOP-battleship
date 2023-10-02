@@ -43,6 +43,7 @@
   /* Shadow */
   --btn-shadow: 0 0 5px 1px var(--accent-color);
   --modal-shadow: 0 0 5px 1px var(--primary-color);
+  --active-player-board-shadow: 0 0 5px 1px var(--accent-color);
 
   /* Border-radius */
   --general-border-radius: 5px;
@@ -97,7 +98,8 @@ input[type='text']:hover:not(:focus) {
   border-color: var(--primary-color);
 }
 
-dialog {
+.modal-name,
+.modal-confirm {
   position: fixed;
   top: 25%;
   left: 50%;
@@ -107,6 +109,7 @@ dialog {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   row-gap: var(--text-to-text-gap);
   padding: var(--modal-padding);
   border: none;
@@ -114,18 +117,22 @@ dialog {
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
   opacity: 0%;
+  z-index: 9;
 }
 
-dialog.show {
+.modal-name.show,
+.modal-confirm.show {
   transform: translateX(-50%);
   opacity: 100%;
 }
 
-dialog::backdrop {
+.modal-name::backdrop,
+.modal-confirm::backdrop {
   backdrop-filter: blur(2px);
 }
 
-.modal-label {
+.modal-label,
+h3 {
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -143,7 +150,7 @@ dialog::backdrop {
   color: var(--text-color-inverse);
   font-size: 0.9rem;
   font-weight: 700;
-  transition: all 0.2s 0s ease-in-out;
+  transition: all 0.1s 0s ease-in-out;
 }
 
 .btn:hover {
@@ -162,6 +169,10 @@ dialog::backdrop {
 
 .hide {
   display: none;
+}
+
+.invisible {
+  opacity: 0;
 }
 
 .main-game {
@@ -193,6 +204,10 @@ dialog::backdrop {
   width: 200px;
 }
 
+#player-id {
+  font-size: 0.9rem;
+}
+
 #player-won {
   margin-top: 10px;
 }
@@ -204,7 +219,15 @@ dialog::backdrop {
   text-align: center;
   flex-wrap: wrap;
   gap: var(--board-gap);
-  margin-top: 25px;
+  margin-top: 20px;
+}
+
+#your-board {
+  text-shadow: rgba(109, 161, 65, 1) 1px 1px;
+}
+
+#opponent-board {
+  text-shadow: rgb(210, 86, 86) 1px 1px;
 }
 
 .game-board {
@@ -214,8 +237,17 @@ dialog::backdrop {
   margin-top: 5px;
 }
 
+.highlight {
+  box-shadow: var(--active-player-board-shadow);
+}
+
 #new-game-btn {
   margin-top: 25px;
+}
+
+.buttons {
+  display: flex;
+  column-gap: 50px;
 }
 
 @media (max-width: 600px) {
@@ -227,10 +259,10 @@ dialog::backdrop {
 /* Loader animation */
 
 .loader {
-  margin: 0 0 0 13px;
-  font-size: 0.23rem;
-  height: 1em;
-  width: 1em;
+  margin: 0 0 0 14px;
+  font-size: 4px;
+  height: 5px;
+  width: 5px;
   border-radius: 50%;
   position: relative;
   text-indent: -9999em;
