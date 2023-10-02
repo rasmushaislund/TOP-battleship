@@ -149,21 +149,4 @@ export class Gameboard {
   }
 }
 
-const boards = new Gameboard();
-boards.buildBoard();
-const showBoard = boards.board;
-console.log(showBoard);
-
-boards.getRandomPlacement();
-
-boards.receiveAttack(2, 6);
-boards.receiveAttack(3, 6);
-boards.receiveAttack(4, 6);
-boards.receiveAttack(2, 2);
-boards.receiveAttack(2, 3);
-boards.receiveAttack(2, 4);
-boards.receiveAttack(2, 5);
-
-console.log(boards.missedShots);
-
 // END //
