@@ -24,6 +24,7 @@
   --secondary-color: #c2d7e9;
   --accent-color: #3974a7;
   --grey-200: #ccd2d6;
+  --grey-400: #a6a9ab;
 
   /* Gaps */
   --text-to-text-gap: 20px;
@@ -233,8 +234,22 @@ h3 {
 .game-board {
   height: 300px;
   width: 300px;
-  border: 1px solid black;
+  border: 1px solid var(--grey-400);
   margin-top: 5px;
+}
+
+.row {
+  display: flex;
+  height: 30px;
+  width: 300px;
+}
+
+.column {
+  width: 30px;
+  height: 30px;
+  flex: 1;
+  border: 1px solid var(--grey-400);
+  cursor: crosshair;
 }
 
 .highlight {
