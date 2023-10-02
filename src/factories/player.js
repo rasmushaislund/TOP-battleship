@@ -1,10 +1,11 @@
 // START //
 
 import { Gameboard } from './gameboard';
+import { Game } from '../controller/gameController';
 
 export class Player {
   playerOneName;
-  playerTwoName = 'computer';
+  playerTwoName;
   activePlayer = this.playerOneName;
   attacks;
 
@@ -14,7 +15,7 @@ export class Player {
   }
 
   attackSquare(row, column) {
-    const gameboard = new Gameboard();
+    const game = Game();
     // gameboard.buildBoard();
 
     if (!this.hasBeenAttacked(row, column)) {
@@ -26,15 +27,15 @@ export class Player {
   }
 
   attackRandomSquare() {
-    const gameboard = new Gameboard();
+    const game = Game();
     // gameboard.buildBoard();
 
     if (this.attacks.length >= 100) return;
-    const randRow = Math.floor(Math.random() * gameboard.gridSize);
-    const randColumn = Math.floor(Math.random() * gameboard.gridSize);
+    const randRow = Math.floor(Math.random() * game.gridSize);
+    const randColumn = Math.floor(Math.random() * game.gridSize);
 
     if (!this.hasBeenAttacked(randRow, randColumn))
-      gameboard.receiveAttack(randRow, randColumn);
+      gameboard.receiveAttack(randRow, randColumn); // issue here
     return;
   }
 
