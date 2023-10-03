@@ -21,28 +21,24 @@ export function Display(playerName) {
     const playerBoard = game.player2dArray;
     const playerBoardContainer = document.querySelector('.game-board-player');
     for (let i = 0; i < playerBoard.length; i++) {
-      const row = document.createElement('div');
-      row.classList.add('row');
       for (let j = 0; j < playerBoard[i].length; j++) {
-        const column = document.createElement('div');
-        column.classList.add('column');
-        row.appendChild(column);
+        const cell = document.createElement('div');
+        cell.classList.add('cell', 'cell-player');
+        cell.dataset.indexNumber = `${[i]}-${[j]}`;
+        playerBoardContainer.appendChild(cell);
       }
-      playerBoardContainer.appendChild(row);
     }
 
     // Build ai grid
     const aiBoard = game.ai2dArray;
     const aiBoardContainer = document.querySelector('.game-board-opponent');
     for (let i = 0; i < aiBoard.length; i++) {
-      const row = document.createElement('div');
-      row.classList.add('row');
       for (let j = 0; j < aiBoard[i].length; j++) {
-        const column = document.createElement('div');
-        column.classList.add('column');
-        row.appendChild(column);
+        const cell = document.createElement('div');
+        cell.classList.add('cell', 'cell-opponent');
+        cell.dataset.indexNumber = `${[i]}-${[j]}`;
+        aiBoardContainer.appendChild(cell);
       }
-      aiBoardContainer.appendChild(row);
     }
   };
 
