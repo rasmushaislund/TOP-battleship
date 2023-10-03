@@ -1,6 +1,7 @@
 // START //
 
 import { Game } from './gameController';
+import { shipProperties } from '../data/shipProperties';
 
 export function Display(playerName) {
   const game = Game();
@@ -15,6 +16,18 @@ export function Display(playerName) {
     aiId.textContent = ai;
   };
 
+  // Color cells occupied buy ships on the player board
+  const colorShipCells = (row, column, type) => {
+    const selectCell = document.querySelector(
+      `[data-index-number='${row}-${column}']`,
+    );
+    for (let i = 0; i < shipProperties.length; i++) {
+      if (type === shipProperties[i].type) {
+        selectCell.style.backgroundColor = `${shipProperties[i].color}`;
+      }
+    }
+  };
+
   // Build board grids based on 2D-arrays
   const buildGrids = () => {
     // Build player grid
@@ -26,6 +39,14 @@ export function Display(playerName) {
         cell.classList.add('cell', 'cell-player');
         cell.dataset.indexNumber = `${[i]}-${[j]}`;
         playerBoardContainer.appendChild(cell);
+
+        // If array-index is a ship then add ship-name as class on grid-cell
+        if (typeof playerBoard[i][j] !== 'number') {
+          const row = i;
+          const column = j;
+          const shipType = playerBoard[i][j][1].type;
+          colorShipCells(row, column, shipType);
+        }
       }
     }
 
