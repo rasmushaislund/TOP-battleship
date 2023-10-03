@@ -234,7 +234,7 @@ h3 {
 .game-board {
   height: 300px;
   width: 300px;
-  margin-top: 5px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
