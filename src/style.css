@@ -44,7 +44,7 @@
   /* Shadow */
   --btn-shadow: 0 0 5px 1px var(--accent-color);
   --modal-shadow: 0 0 5px 1px var(--primary-color);
-  --active-player-board-shadow: 0 0 5px 1px var(--accent-color);
+  --active-player-board-shadow: 0 0 5px 3px var(--accent-color);
 
   /* Border-radius */
   --general-border-radius: 5px;
@@ -234,21 +234,21 @@ h3 {
 .game-board {
   height: 300px;
   width: 300px;
-  border: 1px solid var(--grey-400);
   margin-top: 5px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 1px;
+  outline: 1px solid var(--grey-400);
 }
 
-.row {
-  display: flex;
-  height: 30px;
-  width: 300px;
+.cell {
+  outline: 1px solid var(--grey-400);
 }
 
-.column {
-  width: 30px;
-  height: 30px;
-  flex: 1;
-  border: 1px solid var(--grey-400);
+.cell-opponent:hover {
+  background-color: var(--accent-color);
+  opacity: 0.2;
   cursor: crosshair;
 }
 
