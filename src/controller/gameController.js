@@ -11,7 +11,10 @@ export function Game() {
   const buildPlayerBoard = playerBoard.buildBoard();
   const buildAiBoard = aiBoard.buildBoard();
 
-  console.log(playerBoard, aiBoard);
+  const placeShipsPlayer = playerBoard.getRandomPlacement();
+  const placeShipsAi = aiBoard.getRandomPlacement();
+
+  console.log(playerBoard.board, aiBoard.board);
 
   return {
     gridSize: playerBoard.gridSize,
