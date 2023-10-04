@@ -4,9 +4,9 @@ import { Game } from './gameController';
 import { shipProperties } from '../data/shipProperties';
 
 export function Display(playerName) {
-  const game = Game();
   const player = playerName;
-  const ai = 'Enemy';
+  const ai = 'Pirate AI';
+  const game = Game(player, ai);
 
   // Setting player and ai names on UI
   const setPlayerName = (player, ai) => {
@@ -16,7 +16,7 @@ export function Display(playerName) {
     aiId.textContent = ai;
   };
 
-  // Color cells occupied buy ships on the player board
+  // Color cells occupied by ships on the player board
   const colorShipCells = (row, column, type) => {
     const selectCell = document.querySelector(
       `[data-index-number='${row}-${column}']`,
@@ -63,8 +63,19 @@ export function Display(playerName) {
     }
   };
 
+  // Set initial name in "waiting for player"
+  const setInitialNameWaiting = () => {
+    const waitingForPlayer = document.querySelector('#player-id');
+    const loader = document.querySelector('.loader');
+    waitingForPlayer.textContent = game.getActivePlayer().name;
+
+    // Show loader while waiting for player to make a move
+    loader.classList.remove('invisible');
+  };
+
   setPlayerName(player, ai);
   buildGrids();
+  setInitialNameWaiting();
 }
 
 // END //
