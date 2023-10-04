@@ -1,6 +1,7 @@
 // START //
 
 import './style.css';
+import './html/index.html';
 import { Ship } from './factories/ship';
 import { Gameboard } from './factories/gameboard';
 import { Player } from './factories/player';
@@ -54,6 +55,22 @@ const confirmNo = document.querySelector('#no-btn');
 confirmNo.addEventListener('click', () => {
   modalConfirm.close();
   modalConfirm.classList.remove('show');
+});
+
+// Show info modal on hover
+const infoIcon = document.querySelector('.info-icon');
+const infoModal = document.querySelector('.modal-info');
+
+infoIcon.addEventListener('mouseover', () => {
+  infoModal.classList.remove('hide');
+});
+
+infoIcon.addEventListener('mouseout', () => {
+  infoModal.classList.add('hide');
+});
+
+infoIcon.addEventListener('focus', () => {
+  infoModal.classList.toggle('hide');
 });
 
 // END //
