@@ -43,6 +43,8 @@
   --loader-width: 20px;
   --icon-height: 30px;
   --icon-width: 30px;
+  --legend-icon-height: 20px;
+  --legend-icon-width: 20px;
 
   /* Shadow */
   --btn-shadow: 0 0 5px 1px var(--accent-color);
@@ -288,8 +290,8 @@ h3 {
 }
 
 .square {
-  width: 20px;
-  height: 20px;
+  height: var(--legend-icon-height);
+  width: var(--legend-icon-width);
   border: 1px solid var(--grey-400);
 }
 
@@ -307,6 +309,12 @@ h3 {
 }
 .square-2 {
   background-color: rgb(12, 4, 12, 0.4);
+}
+
+.legend-icon {
+  height: var(--legend-icon-height);
+  width: auto;
+  border: 1px solid var(--grey-400);
 }
 
 .game-board {
