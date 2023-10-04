@@ -47,6 +47,7 @@
   /* Shadow */
   --btn-shadow: 0 0 5px 1px var(--accent-color);
   --modal-shadow: 0 0 5px 1px var(--primary-color);
+  --modal-shadow-info: 0 0 5px 1px var(--grey-400);
   --active-player-board-shadow: 0 0 5px 3px var(--accent-color);
 
   /* Border-radius */
@@ -171,10 +172,6 @@ h3 {
   font-size: 5rem;
 }
 
-.hide {
-  display: none;
-}
-
 .invisible {
   opacity: 0;
 }
@@ -237,6 +234,7 @@ h3 {
   justify-content: start;
   align-items: center;
   column-gap: var(--icon-to-text-gap);
+  position: relative;
 }
 
 .icon {
@@ -262,6 +260,54 @@ h3 {
   cursor: help;
 }
 
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  row-gap: var(--icon-to-text-gap);
+  padding: var(--btn-padding);
+  position: absolute;
+  left: 40%;
+  bottom: 85%;
+  background-color: var(--text-color-inverse);
+  min-width: 150px;
+  border-radius: var(--general-border-radius);
+  box-shadow: var(--modal-shadow-info);
+}
+
+.legend {
+  display: flex;
+  column-gap: 3px;
+  font-size: 0.8rem;
+}
+
+.legend p:nth-child(3) {
+  margin-left: 10px;
+}
+
+.square {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--grey-400);
+}
+
+.square-5 {
+  background-color: rgb(252, 4, 4, 0.4);
+}
+.square-4 {
+  background-color: rgb(4, 140, 4, 0.4);
+}
+.square-3-1 {
+  background-color: rgb(4, 4, 252, 0.4);
+}
+.square-3-2 {
+  background-color: rgb(252, 251, 32, 0.4);
+}
+.square-2 {
+  background-color: rgb(12, 4, 12, 0.4);
+}
+
 .game-board {
   height: 300px;
   width: 300px;
@@ -275,6 +321,7 @@ h3 {
 
 .cell {
   outline: 1px solid var(--grey-400);
+  background-color: var(--text-color-inverse);
 }
 
 .cell-opponent:hover {
@@ -294,6 +341,10 @@ h3 {
 .buttons {
   display: flex;
   column-gap: 50px;
+}
+
+.hide {
+  display: none;
 }
 
 @media (max-width: 600px) {
