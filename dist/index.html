@@ -72,11 +72,73 @@
         </p>
         <div class="board-container">
           <div class="board">
-            <p id="your-board"></p>
-            <div class="game-board game-board-player highlight"></div>
+            <div class="board-info">
+              <img
+                class="icon player-icon"
+                src="assets/img/sailor.cfde3097b9ededef65eb.svg"
+                alt="player icon"
+              />
+              <p id="your-board"></p>
+              <img
+                class="icon info-icon"
+                src="assets/img/info.c8211ecd492e7628ee23.svg"
+                alt="information"
+              />
+              <div class="modal-info hide">
+                <div class="legend">
+                  <div class="square square-5"></div>
+                  <p class="legend-text">&times5</p>
+                  <p class="legend-text-1">Carrier</p>
+                </div>
+                <div class="legend">
+                  <div class="square square-4"></div>
+                  <p class="legend-text">&times4</p>
+                  <p class="legend-text">Battleship</p>
+                </div>
+                <div class="legend">
+                  <div class="square square-3-1"></div>
+                  <p class="legend-text">&times3</p>
+                  <p class="legend-text">Destroyer</p>
+                </div>
+                <div class="legend">
+                  <div class="square square-3-2"></div>
+                  <p class="legend-text">&times3</p>
+                  <p class="legend-text">Submarine</p>
+                </div>
+                <div class="legend">
+                  <div class="square square-2"></div>
+                  <p class="legend-text">&times2</p>
+                  <p class="legend-text">Patrol Boat</p>
+                </div>
+                <div class="legend">
+                  <img
+                    class="legend-icon"
+                    src="assets/img/hit.5ed2ed320195e3023b96.svg"
+                    alt="explosion"
+                  />
+                  <p class="legend-text">Hit</p>
+                </div>
+                <div class="legend">
+                  <img
+                    class="legend-icon"
+                    src="assets/img/miss.8c23780bc3989658d738.svg"
+                    alt="waves"
+                  />
+                  <p class="legend-text">Miss</p>
+                </div>
+              </div>
+            </div>
+            <div class="game-board game-board-player"></div>
           </div>
           <div class="board">
-            <p id="opponent-board"></p>
+            <div class="board-info">
+              <img
+                class="icon opponent-icon"
+                src="assets/img/pirate.1bd763419f3b2835c5fd.svg"
+                alt="opponent icon"
+              />
+              <p id="opponent-board"></p>
+            </div>
             <div class="game-board game-board-opponent"></div>
           </div>
         </div>
