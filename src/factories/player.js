@@ -4,9 +4,6 @@ import { Gameboard } from './gameboard';
 import { Game } from '../controller/gameController';
 
 export class Player {
-  playerOneName;
-  playerTwoName;
-  activePlayer = this.playerOneName;
   attacks;
 
   constructor(playerName) {
@@ -15,27 +12,25 @@ export class Player {
   }
 
   attackSquare(row, column) {
-    const game = Game();
-    // gameboard.buildBoard();
+    const aiBoard = Game().aiBoard;
 
     if (!this.hasBeenAttacked(row, column)) {
       this.attacks.push([row, column]);
-      gameboard.receiveAttack(row, column);
+      aiBoard.receiveAttack(row, column);
     } else {
       return;
     }
   }
 
   attackRandomSquare() {
-    const game = Game();
-    // gameboard.buildBoard();
+    const playerBoard = Game().playerBoard;
 
     if (this.attacks.length >= 100) return;
-    const randRow = Math.floor(Math.random() * game.gridSize);
-    const randColumn = Math.floor(Math.random() * game.gridSize);
+    const randRow = Math.floor(Math.random() * playerBoard.gridSize);
+    const randColumn = Math.floor(Math.random() * playerBoard.gridSize);
 
     if (!this.hasBeenAttacked(randRow, randColumn))
-      gameboard.receiveAttack(randRow, randColumn); // issue here
+      playerBoard.receiveAttack(randRow, randColumn);
     return;
   }
 
