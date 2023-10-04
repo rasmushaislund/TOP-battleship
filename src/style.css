@@ -28,6 +28,7 @@
 
   /* Gaps */
   --text-to-text-gap: 20px;
+  --icon-to-text-gap: 5px;
   --board-gap: 30px;
 
   /* Padding */
@@ -40,6 +41,8 @@
   /* Width & Height */
   --loader-height: 20px;
   --loader-width: 20px;
+  --icon-height: 30px;
+  --icon-width: 30px;
 
   /* Shadow */
   --btn-shadow: 0 0 5px 1px var(--accent-color);
@@ -223,18 +226,46 @@ h3 {
   margin-top: 20px;
 }
 
-#your-board {
-  text-shadow: rgba(109, 161, 65, 1) 1px 1px;
+#your-board,
+#opponent-board {
+  font-weight: 700;
+  color: var(--text-color-primary);
 }
 
-#opponent-board {
-  text-shadow: rgb(210, 86, 86) 1px 1px;
+.board-info {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: var(--icon-to-text-gap);
+}
+
+.icon {
+  height: var(--icon-height);
+  width: auto;
+  background-color: var(--background-color);
+  border-radius: 50px;
+}
+
+.info-icon {
+  margin-left: auto;
+  opacity: 0.3;
+  transition: all 0.1s 0s ease-in-out;
+}
+
+.info-icon:hover {
+  opacity: 0.8;
+  cursor: help;
+}
+
+.info-icon:focus {
+  opacity: 0.8;
+  cursor: help;
 }
 
 .game-board {
   height: 300px;
   width: 300px;
-  margin-top: 10px;
+  margin-top: 7px;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
