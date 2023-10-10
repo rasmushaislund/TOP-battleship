@@ -208,11 +208,12 @@ h3 {
 }
 
 #player-id {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 #player-won {
   margin-top: 10px;
+  vertical-align: middle;
 }
 
 .board-container {
@@ -326,6 +327,11 @@ h3 {
   grid-template-rows: repeat(10, 1fr);
   gap: 1px;
   outline: 1px solid var(--grey-400);
+  /* background-color: var(--text-color-inverse); */
+}
+
+.disabled-board {
+  pointer-events: none;
 }
 
 .cell {
@@ -334,9 +340,12 @@ h3 {
 }
 
 .cell-opponent:hover {
-  background-color: var(--accent-color);
-  opacity: 0.2;
   cursor: crosshair;
+  background-color: var(--secondary-color);
+}
+
+.disabled-cell {
+  background-color: transparent;
 }
 
 .highlight {
