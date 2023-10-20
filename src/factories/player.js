@@ -5,6 +5,7 @@ import { Game } from '../controller/gameController';
 
 export class Player {
   attacks;
+  alreadyAttacked;
 
   constructor(playerName) {
     this.playerName = playerName;
@@ -16,7 +17,7 @@ export class Player {
       this.attacks.push([row, column]);
       enemyBoard.receiveAttack(row, column);
     } else {
-      return;
+      return false;
     }
   }
 
@@ -29,7 +30,7 @@ export class Player {
       this.attacks.push([randRow, randColumn]);
       playerBoard.receiveAttack(randRow, randColumn);
     } else {
-      return;
+      this.alreadyAttacked = true;
     }
   }
 
