@@ -9,6 +9,7 @@ export class Gameboard {
   missedShots;
   sunkenShips;
   gridSize = 10;
+  isHit;
 
   constructor() {
     this.board = []; // Interface
@@ -109,20 +110,18 @@ export class Gameboard {
   }
 
   receiveAttack(row, column) {
-    let isHit;
     let coordinate = this.board[row][column];
 
     if (typeof coordinate !== 'number') {
       coordinate[1].hit(coordinate[0]);
-      isHit = true;
+      this.isHit = true;
       if (coordinate[1].isSunk()) {
         this.sunkenShips.push(coordinate[1]);
       }
     } else {
       this.missedShots.push([row, column]);
-      isHit = false;
+      this.isHit = false;
     }
-    return isHit;
   }
 
   allShipsSunk() {
