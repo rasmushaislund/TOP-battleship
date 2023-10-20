@@ -39,13 +39,13 @@ export function Game(playerName, aiName) {
   const getActivePlayer = () => activePlayer;
 
   // Play a round of the game
-  let winner = players[0].name;
+  let winner;
   const playRound = (row, column) => {
     // Check for a winner
     const checkWinner = () => {
-      if (playerBoard.allShipsSunk) {
+      if (playerBoard.allShipsSunk()) {
         winner = players[1].name;
-      } else if (aiBoard.allShipsSunk) {
+      } else if (aiBoard.allShipsSunk()) {
         winner = players[0].name;
       }
     };
@@ -59,21 +59,31 @@ export function Game(playerName, aiName) {
 
     // Let AI attack player board with "thinking" delay
     if (getActivePlayer() === players[1]) {
-      const delayAttack = Math.floor(Math.random() * 5000);
-      console.log(delayAttack);
-      const aiAttack = ai.attackRandomSquare(playerBoard);
-      setTimeout(aiAttack, delayAttack);
+      const aiAttack = () => {
+        ai.attackRandomSquare(playerBoard);
+        if (ai.alreadyAttacked) aiAttack();
+      };
+      aiAttack();
       checkWinner();
     }
 
     switchPlayerTurn();
 
-    console.log(playerBoard, aiBoard, player, ai);
+    console.log(
+      playerBoard,
+      aiBoard,
+      player,
+      ai,
+      playerBoard.allShipsSunk(),
+      aiBoard.allShipsSunk(),
+      winner,
+    );
   };
-
   return {
     playerBoard,
     aiBoard,
+    playerAttacks: player.attacks,
+    aiAttacks: ai.attacks,
     gridSize: playerBoard.gridSize,
     player2dArray: playerBoard.board,
     ai2dArray: aiBoard.board,
