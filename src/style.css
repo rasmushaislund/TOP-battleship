@@ -336,8 +336,15 @@ h3 {
 }
 
 .cell {
+  appearance: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
   outline: 1px solid var(--grey-400);
   background-color: var(--text-color-inverse);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cell-opponent:hover {
@@ -347,6 +354,16 @@ h3 {
 
 .disabled-cell {
   background-color: transparent;
+}
+
+.attacked-cell:hover {
+  background-color: var(--text-color-inverse);
+  cursor: not-allowed;
+}
+
+.miss {
+  max-height: 90%;
+  max-width: 90%;
 }
 
 .highlight {
