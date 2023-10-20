@@ -35,7 +35,7 @@ export function Display(playerName) {
     const playerBoardContainer = document.querySelector('.game-board-player');
     for (let i = 0; i < playerBoard.length; i++) {
       for (let j = 0; j < playerBoard[i].length; j++) {
-        const cell = document.createElement('div');
+        const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-player');
         cell.dataset.indexNumber = `${[i]}-${[j]}`;
         playerBoardContainer.appendChild(cell);
@@ -55,7 +55,7 @@ export function Display(playerName) {
     const aiBoardContainer = document.querySelector('.game-board-opponent');
     for (let i = 0; i < aiBoard.length; i++) {
       for (let j = 0; j < aiBoard[i].length; j++) {
-        const cell = document.createElement('div');
+        const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-opponent');
         cell.dataset.indexNumber = `${[i]}-${[j]}`;
         aiBoardContainer.appendChild(cell);
@@ -85,6 +85,7 @@ export function Display(playerName) {
   opponentBoard.addEventListener('mouseup', (e) => {
     e.preventDefault();
     const target = e.target;
+    target.setAttribute('type', 'button');
 
     // Convert cell indexNumber to coordinates
     const indexNumber = target.dataset.indexNumber;
@@ -105,7 +106,7 @@ export function Display(playerName) {
       winner.classList.remove('invisible');
       playerTurn.classList.add('invisible');
 
-      // Disable board for further input
+      // Disable board for further input when winner is found
       const gameBoards = document.querySelectorAll('.game-board');
       const cells = document.querySelectorAll('.cell');
 
@@ -117,6 +118,16 @@ export function Display(playerName) {
         cell.classList.add('disabled-cell');
       });
     }
+
+    // Disable attacked opponent cell
+    target.setAttribute('disabled', true);
+    target.classList.add('attacked-cell');
+
+    const miss = document.createElement('img');
+    miss.classList.add('miss');
+    miss.setAttribute('src', '../assets/img/miss.svg');
+
+    target.appendChild(miss);
   });
 }
 
