@@ -356,12 +356,13 @@ h3 {
   background-color: transparent;
 }
 
-.attacked-cell:hover {
+.attacked-opponent-cell:hover {
   background-color: var(--text-color-inverse);
   cursor: not-allowed;
 }
 
-.miss {
+.miss,
+.hit {
   max-height: 90%;
   max-width: 90%;
 }
