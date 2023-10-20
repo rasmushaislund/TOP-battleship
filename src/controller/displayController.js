@@ -94,7 +94,7 @@ export function Display(playerName) {
     const row = Number(indexToArray[0]);
     const column = Number(indexToArray[1]);
 
-    // Initiate attack from player
+    // Initiate round with attack from player
     game.playRound(row, column);
 
     // Set appropriate icon on attacked opponent cell wether a hit or a miss
