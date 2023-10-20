@@ -125,7 +125,7 @@ export class Gameboard {
   }
 
   allShipsSunk() {
-    if (!this.sunkenShips.length === shipProperties.length) return false;
+    if (this.sunkenShips.length < 1) return false;
     return true;
   }
 
