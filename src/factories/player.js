@@ -29,6 +29,7 @@ export class Player {
     if (!this.hasBeenAttacked(randRow, randColumn)) {
       this.attacks.push([randRow, randColumn]);
       playerBoard.receiveAttack(randRow, randColumn);
+      this.alreadyAttacked = false;
     } else {
       this.alreadyAttacked = true;
     }
