@@ -37,6 +37,7 @@ export function Display(playerName) {
       for (let j = 0; j < playerBoard[i].length; j++) {
         const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-player');
+        cell.setAttribute('type', 'button');
         cell.dataset.indexNumber = `${[i]}-${[j]}`;
         playerBoardContainer.appendChild(cell);
 
@@ -57,6 +58,7 @@ export function Display(playerName) {
       for (let j = 0; j < aiBoard[i].length; j++) {
         const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-opponent');
+        cell.setAttribute('type', 'button');
         cell.dataset.indexNumber = `${[i]}-${[j]}`;
         aiBoardContainer.appendChild(cell);
       }
@@ -85,7 +87,6 @@ export function Display(playerName) {
   opponentBoard.addEventListener('mouseup', (e) => {
     e.preventDefault();
     const target = e.target;
-    target.setAttribute('type', 'button');
 
     // Convert cell indexNumber to coordinates
     const indexNumber = target.dataset.indexNumber;
@@ -95,6 +96,43 @@ export function Display(playerName) {
 
     // Initiate attack from player
     game.playRound(row, column);
+
+    // Set appropriate icon on attacked opponent cell wether a hit or a miss
+    if (!game.aiBoard.isHit) {
+      const miss = document.createElement('img');
+      miss.classList.add('miss');
+      miss.setAttribute('src', '../assets/img/miss.svg');
+      target.appendChild(miss);
+    } else {
+      const hit = document.createElement('img');
+      hit.classList.add('hit');
+      hit.setAttribute('src', '../assets/img/hit.svg');
+      target.appendChild(hit);
+    }
+
+    // Disable attacked opponent cell
+    target.setAttribute('disabled', true);
+    target.classList.add('attacked-opponent-cell');
+
+    // Set appropriate icon on attacked player cell wether a hit or a miss
+    const latestAiAttack = game.aiAttacks[game.aiAttacks.length - 1];
+    const aiAttackRow = latestAiAttack[0];
+    const aiAttackColumn = latestAiAttack[1];
+    const getPlayerCell = document.querySelector(
+      `[data-index-number='${aiAttackRow}-${aiAttackColumn}']`,
+    );
+
+    if (!game.playerBoard.isHit) {
+      const miss = document.createElement('img');
+      miss.classList.add('miss');
+      miss.setAttribute('src', '../assets/img/miss.svg');
+      getPlayerCell.appendChild(miss);
+    } else {
+      const hit = document.createElement('img');
+      hit.classList.add('hit');
+      hit.setAttribute('src', '../assets/img/hit.svg');
+      getPlayerCell.appendChild(hit);
+    }
 
     // Show a winner
     if (game.winner) {
@@ -118,16 +156,6 @@ export function Display(playerName) {
         cell.classList.add('disabled-cell');
       });
     }
-
-    // Disable attacked opponent cell
-    target.setAttribute('disabled', true);
-    target.classList.add('attacked-cell');
-
-    const miss = document.createElement('img');
-    miss.classList.add('miss');
-    miss.setAttribute('src', '../assets/img/miss.svg');
-
-    target.appendChild(miss);
   });
 }
 
