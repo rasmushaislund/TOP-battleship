@@ -12,9 +12,15 @@ export class Gameboard {
   isHit;
 
   constructor() {
-    this.board = []; // Interface
-    this.missedShots = []; // Interface
-    this.sunkenShips = []; // Interface
+    this.board = [];
+    this.missedShots = [];
+    this.sunkenShips = [];
+  }
+
+  reset() {
+    this.board = [];
+    this.missedShots = [];
+    this.sunkenShips = [];
   }
 
   // Generate the game board as a 2D-array
