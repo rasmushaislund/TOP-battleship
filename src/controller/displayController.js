@@ -8,6 +8,12 @@ export function Display(playerName) {
   const ai = 'Pirate AI';
   const game = Game(player, ai);
 
+  const playerBoard = game.getPlayerBoard();
+  const aiBoard = game.getAiBoard();
+
+  const getPlayer = game.getPlayer();
+  const getAi = game.getAi();
+
   // Setting player and ai names on UI
   const setPlayerName = (player, ai) => {
     const playerId = document.querySelector('#your-board');
@@ -31,10 +37,10 @@ export function Display(playerName) {
   // Build board grids based on 2D-arrays
   const buildGrids = () => {
     // Build player grid
-    const playerBoard = game.player2dArray;
+    const player2dArray = playerBoard.board;
     const playerBoardContainer = document.querySelector('.game-board-player');
-    for (let i = 0; i < playerBoard.length; i++) {
-      for (let j = 0; j < playerBoard[i].length; j++) {
+    for (let i = 0; i < player2dArray.length; i++) {
+      for (let j = 0; j < player2dArray[i].length; j++) {
         const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-player');
         cell.setAttribute('type', 'button');
@@ -42,20 +48,20 @@ export function Display(playerName) {
         playerBoardContainer.appendChild(cell);
 
         // If array-index is a ship then add ship-name as class on grid-cell
-        if (typeof playerBoard[i][j] !== 'number') {
+        if (typeof player2dArray[i][j] !== 'number') {
           const row = i;
           const column = j;
-          const shipType = playerBoard[i][j][1].type;
+          const shipType = player2dArray[i][j][1].type;
           colorShipCells(row, column, shipType);
         }
       }
     }
 
     // Build ai grid
-    const aiBoard = game.ai2dArray;
+    const ai2dArray = aiBoard.board;
     const aiBoardContainer = document.querySelector('.game-board-opponent');
-    for (let i = 0; i < aiBoard.length; i++) {
-      for (let j = 0; j < aiBoard[i].length; j++) {
+    for (let i = 0; i < ai2dArray.length; i++) {
+      for (let j = 0; j < ai2dArray[i].length; j++) {
         const cell = document.createElement('button');
         cell.classList.add('cell', 'cell-opponent');
         cell.setAttribute('type', 'button');
@@ -75,11 +81,31 @@ export function Display(playerName) {
     loader.classList.remove('invisible');
   };
 
-  // Check which player turn it is
-
   setPlayerName(player, ai);
   buildGrids();
   setNameWaiting();
+
+  const boardAccessibility = (status) => {
+    // Disable board for further input when winner is found
+    const gameBoards = document.querySelectorAll('.game-board');
+    const cells = document.querySelectorAll('.cell');
+
+    gameBoards.forEach((board) => {
+      if (status === 'disable') {
+        board.classList.add('disabled-board');
+      } else if (status === 'enable') {
+        board.classList.remove('disabled-board');
+      }
+    });
+
+    cells.forEach((cell) => {
+      if (status === 'disable') {
+        cell.classList.add('disabled-cell');
+      } else if (status === 'enable') {
+        cell.classList.remove('disabled-cell');
+      }
+    });
+  };
 
   // Event listener for player attack on enemy
   const opponentBoard = document.querySelector('.game-board-opponent');
@@ -98,7 +124,7 @@ export function Display(playerName) {
     game.playRound(row, column);
 
     // Set appropriate icon on attacked opponent cell wether a hit or a miss
-    if (!game.aiBoard.isHit) {
+    if (!aiBoard.isHit) {
       const miss = document.createElement('img');
       miss.classList.add('miss');
       miss.setAttribute('src', '../assets/img/miss.svg');
@@ -114,48 +140,101 @@ export function Display(playerName) {
     target.setAttribute('disabled', true);
     target.classList.add('attacked-opponent-cell');
 
-    // Set appropriate icon on attacked player cell wether a hit or a miss
-    const latestAiAttack = game.aiAttacks[game.aiAttacks.length - 1];
-    const aiAttackRow = latestAiAttack[0];
-    const aiAttackColumn = latestAiAttack[1];
-    const getPlayerCell = document.querySelector(
-      `[data-index-number='${aiAttackRow}-${aiAttackColumn}']`,
-    );
+    const ai = game.getAi();
 
-    if (!game.playerBoard.isHit) {
-      const miss = document.createElement('img');
-      miss.classList.add('miss');
-      miss.setAttribute('src', '../assets/img/miss.svg');
-      getPlayerCell.appendChild(miss);
-    } else {
-      const hit = document.createElement('img');
-      hit.classList.add('hit');
-      hit.setAttribute('src', '../assets/img/hit.svg');
-      getPlayerCell.appendChild(hit);
-    }
+    // Set appropriate icon on attacked player cell wether a hit or a miss
+    const showAiAttack = () => {
+      const latestAiAttack = ai.attacks[ai.attacks.length - 1];
+      const aiAttackRow = latestAiAttack[0];
+      const aiAttackColumn = latestAiAttack[1];
+      const getPlayerCell = document.querySelector(
+        `[data-index-number='${aiAttackRow}-${aiAttackColumn}']`,
+      );
+
+      if (!playerBoard.isHit) {
+        const miss = document.createElement('img');
+        miss.classList.add('miss');
+        miss.setAttribute('src', '../assets/img/miss.svg');
+        getPlayerCell.appendChild(miss);
+      } else {
+        const hit = document.createElement('img');
+        hit.classList.add('hit');
+        hit.setAttribute('src', '../assets/img/hit.svg');
+        getPlayerCell.appendChild(hit);
+      }
+    };
 
     // Show a winner
-    if (game.winner) {
-      const winner = document.querySelector('#player-won');
-      const winnerId = document.querySelector('#winner-id');
-      const playerTurn = document.querySelector('.player-turn');
+    const getWinner = game.getWinner();
+    const winner = document.querySelector('#player-won');
+    const winnerId = document.querySelector('#winner-id');
+    const playerTurn = document.querySelector('.player-turn');
 
-      winnerId.textContent = game.winner;
+    if (getWinner) {
+      winnerId.textContent = getWinner;
       winner.classList.remove('invisible');
       playerTurn.classList.add('invisible');
 
-      // Disable board for further input when winner is found
-      const gameBoards = document.querySelectorAll('.game-board');
-      const cells = document.querySelectorAll('.cell');
+      boardAccessibility('disable');
+    } else {
+      winner.classList.add('invisible');
+      playerTurn.classList.remove('invisible');
 
-      gameBoards.forEach((board) => {
-        board.classList.add('disabled-board');
-      });
-
-      cells.forEach((cell) => {
-        cell.classList.add('disabled-cell');
-      });
+      // Makes random delay in ai decision and
+      const aiThinkTime = Math.random() * 3000;
+      console.log(aiThinkTime);
+      setTimeout(showAiAttack, aiThinkTime);
     }
+  });
+
+  // When confirming a new game
+  const modalConfirm = document.querySelector('.modal-confirm');
+  // const playerId = document.querySelector('#your-board');
+  const confirmYes = document.querySelector('#yes-btn');
+  const playerBoardContainer = document.querySelector('.game-board-player');
+  const aiBoardContainer = document.querySelector('.game-board-opponent');
+
+  confirmYes.addEventListener('click', () => {
+    modalConfirm.close();
+    modalConfirm.classList.remove('show');
+
+    // Clear boards
+    while (playerBoardContainer.firstChild) {
+      playerBoardContainer.removeChild(playerBoardContainer.lastChild);
+    }
+    while (aiBoardContainer.firstChild) {
+      aiBoardContainer.removeChild(aiBoardContainer.lastChild);
+    }
+
+    // Reset Initialized classes
+    playerBoard.reset();
+    aiBoard.reset();
+    getPlayer.reset();
+    getAi.reset();
+
+    // Re-build boards and re-place ships after class reset
+    playerBoard.buildBoard();
+    aiBoard.buildBoard();
+    playerBoard.getRandomPlacement();
+    aiBoard.getRandomPlacement();
+    buildGrids();
+
+    // Hide winner UI and show player wait UI
+    const winner = document.querySelector('#player-won');
+    const playerTurn = document.querySelector('.player-turn');
+    winner.classList.add('invisible');
+    playerTurn.classList.remove('invisible');
+
+    // Enable enemy board for attacks
+    boardAccessibility('enable');
+  });
+
+  // When regretting to start a new game
+  const confirmNo = document.querySelector('#no-btn');
+
+  confirmNo.addEventListener('click', () => {
+    modalConfirm.close();
+    modalConfirm.classList.remove('show');
   });
 }
 
