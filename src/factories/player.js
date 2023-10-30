@@ -12,6 +12,10 @@ export class Player {
     this.attacks = [];
   }
 
+  reset() {
+    this.attacks = [];
+  }
+
   attackSquare(row, column, enemyBoard) {
     if (!this.hasBeenAttacked(row, column)) {
       this.attacks.push([row, column]);
