@@ -7,6 +7,8 @@ export function Game(playerName, aiName) {
   // Initialize gameboard and place ships
   const playerBoard = new Gameboard();
   const aiBoard = new Gameboard();
+  const getPlayerBoard = () => playerBoard;
+  const getAiBoard = () => aiBoard;
 
   const buildPlayerBoard = playerBoard.buildBoard();
   const buildAiBoard = aiBoard.buildBoard();
@@ -26,6 +28,8 @@ export function Game(playerName, aiName) {
 
   const player = new Player(players[0].name);
   const ai = new Player(players[1].name);
+  const getPlayer = () => player;
+  const getAi = () => ai;
 
   let activePlayer = players[0];
   const switchPlayerTurn = () => {
@@ -40,9 +44,14 @@ export function Game(playerName, aiName) {
 
   // Play a round of the game
   let winner;
+  const getWinner = () => winner;
+
   const playRound = (row, column) => {
+    // Reset winner variable in case of new game
+    winner = '';
+
     // Check for a winner
-    const checkWinner = () => {
+    const isWinner = () => {
       if (playerBoard.allShipsSunk()) {
         winner = players[1].name;
       } else if (aiBoard.allShipsSunk()) {
@@ -52,7 +61,7 @@ export function Game(playerName, aiName) {
 
     if (getActivePlayer() === players[0]) {
       player.attackSquare(row, column, aiBoard);
-      checkWinner();
+      isWinner();
     }
 
     switchPlayerTurn();
@@ -64,32 +73,21 @@ export function Game(playerName, aiName) {
         if (ai.alreadyAttacked) aiAttack();
       };
       aiAttack();
-      checkWinner();
+      isWinner();
     }
 
     switchPlayerTurn();
-
-    console.log(
-      playerBoard,
-      aiBoard,
-      player,
-      ai,
-      playerBoard.allShipsSunk(),
-      aiBoard.allShipsSunk(),
-      winner,
-    );
   };
+
   return {
-    playerBoard,
-    aiBoard,
-    playerAttacks: player.attacks,
-    aiAttacks: ai.attacks,
-    gridSize: playerBoard.gridSize,
-    player2dArray: playerBoard.board,
-    ai2dArray: aiBoard.board,
+    getPlayerBoard,
+    getAiBoard,
+    getPlayer,
+    getAi,
+    gridSize: getPlayerBoard.gridSize,
     getActivePlayer,
     playRound,
-    winner,
+    getWinner,
   };
 }
 
