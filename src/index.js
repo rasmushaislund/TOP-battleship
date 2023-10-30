@@ -2,10 +2,6 @@
 
 import './style.css';
 import './html/index.html';
-import { Ship } from './factories/ship';
-import { Gameboard } from './factories/gameboard';
-import { Player } from './factories/player';
-import { Game } from './controller/gameController';
 import { Display } from './controller/displayController';
 
 // Set copyright year automatically
@@ -44,17 +40,8 @@ const newGame = document.querySelector('#new-game-btn');
 const modalConfirm = document.querySelector('.modal-confirm');
 
 newGame.addEventListener('click', () => {
-  const modalConfirm = document.querySelector('.modal-confirm');
   modalConfirm.showModal();
   modalConfirm.classList.add('show');
-});
-
-// When regretting to start a new game
-const confirmNo = document.querySelector('#no-btn');
-
-confirmNo.addEventListener('click', () => {
-  modalConfirm.close();
-  modalConfirm.classList.remove('show');
 });
 
 // Show info modal on hover
