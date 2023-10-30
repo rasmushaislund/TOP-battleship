@@ -13,6 +13,10 @@ export class Ship {
     this.hits = [];
   }
 
+  reset() {
+    this.hits = [];
+  }
+
   hit(position) {
     if (
       this.hits.includes(position) ||
