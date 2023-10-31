@@ -2,6 +2,8 @@
 
 import { Game } from './gameController';
 import { shipProperties } from '../data/shipProperties';
+import hitIcon from '../assets/img/hit.svg';
+import missIcon from '../assets/img/miss.svg';
 
 export function Display(playerName) {
   const player = playerName;
@@ -132,12 +134,12 @@ export function Display(playerName) {
     if (!aiBoard.isHit) {
       const miss = document.createElement('img');
       miss.classList.add('miss');
-      miss.setAttribute('src', '../assets/img/miss.svg');
+      miss.setAttribute('src', missIcon);
       target.appendChild(miss);
     } else {
       const hit = document.createElement('img');
       hit.classList.add('hit');
-      hit.setAttribute('src', '../assets/img/hit.svg');
+      hit.setAttribute('src', hitIcon);
       target.appendChild(hit);
     }
 
@@ -159,12 +161,12 @@ export function Display(playerName) {
       if (!playerBoard.isHit) {
         const miss = document.createElement('img');
         miss.classList.add('miss');
-        miss.setAttribute('src', '../assets/img/miss.svg');
+        miss.setAttribute('src', missIcon);
         getPlayerCell.appendChild(miss);
       } else {
         const hit = document.createElement('img');
         hit.classList.add('hit');
-        hit.setAttribute('src', '../assets/img/hit.svg');
+        hit.setAttribute('src', hitIcon);
         getPlayerCell.appendChild(hit);
       }
       boardAccessibility('enable');
