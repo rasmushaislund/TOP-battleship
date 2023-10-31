@@ -1,8 +1,5 @@
 // START //
 
-import { Gameboard } from './gameboard';
-import { Game } from '../controller/gameController';
-
 export class Player {
   attacks;
   alreadyAttacked;
