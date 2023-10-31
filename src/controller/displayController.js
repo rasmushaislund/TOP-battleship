@@ -86,9 +86,14 @@ export function Display(playerName) {
   setNameWaiting();
 
   const boardAccessibility = (status) => {
-    // Disable board for further input when winner is found
+    // Disable board for further input when winner is found or ai is to make an attack
     const gameBoards = document.querySelectorAll('.game-board');
+    const aiBoard = document.querySelector('.game-board-opponent');
     const cells = document.querySelectorAll('.cell');
+
+    if (status === 'waiting') {
+      aiBoard.classList.add('disabled-board');
+    }
 
     gameBoards.forEach((board) => {
       if (status === 'disable') {
@@ -162,6 +167,7 @@ export function Display(playerName) {
         hit.setAttribute('src', '../assets/img/hit.svg');
         getPlayerCell.appendChild(hit);
       }
+      boardAccessibility('enable');
     };
 
     // Show a winner
@@ -180,7 +186,10 @@ export function Display(playerName) {
       winner.classList.add('invisible');
       playerTurn.classList.remove('invisible');
 
-      // Makes random delay in ai decision and
+      // Prevent new player attack before ai has attacked
+      boardAccessibility('waiting');
+
+      // Makes random delay in ai decision
       const aiThinkTime = Math.random() * 3000;
       console.log(aiThinkTime);
       setTimeout(showAiAttack, aiThinkTime);
