@@ -2,7 +2,6 @@
 
 import { shipProperties } from '../data/shipProperties';
 import { Ship } from './ship';
-import { Player } from './player';
 
 export class Gameboard {
   board;
