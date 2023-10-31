@@ -198,7 +198,6 @@ export function Display(playerName) {
 
   // When confirming a new game
   const modalConfirm = document.querySelector('.modal-confirm');
-  // const playerId = document.querySelector('#your-board');
   const confirmYes = document.querySelector('#yes-btn');
   const playerBoardContainer = document.querySelector('.game-board-player');
   const aiBoardContainer = document.querySelector('.game-board-opponent');
